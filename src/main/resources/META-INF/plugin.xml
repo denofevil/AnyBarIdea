@@ -1,0 +1,15 @@
+<idea-plugin>
+    <name>AnyBarIdea</name>
+    <id>com.github.denofevil.anyBarIdea</id>
+    <idea-version since-build="141.1532.4" />
+    <vendor email="dennis.ushakov@jetbrains.com" url="https://github.com/denofevil/AnyBarIdea">Dennis Ushakov</vendor>
+    <description><![CDATA[
+    This plugin provides integration with <a href="https://github.com/tonsky/AnyBar">AnyBar</a> OS X menubar status indicator
+    ]]></description>
+    <depends>com.intellij.modules.lang</depends>
+    <application-components>
+        <component>
+            <implementation-class>com.github.denofevil.anyBarIdea.AnyBarConnector</implementation-class>
+        </component>
+    </application-components>
+</idea-plugin>

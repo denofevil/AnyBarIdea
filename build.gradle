@@ -1,0 +1,26 @@
+buildscript {
+  repositories {
+    maven { url 'http://dl.bintray.com/jetbrains/intellij-plugin-service' }
+  }
+}
+
+plugins {
+  id "org.jetbrains.intellij" version "0.1.4"
+}
+
+dependencies {
+   compile files('lib/AnyBar4j.jar')
+}
+
+version="0.1"
+intellij {
+  version 'IC-14.1.4'
+  pluginName 'AnyBarIdea'
+  downloadSources false
+  updateSinceUntilBuild false
+
+  publish {
+    username 'dennis.ushakov'
+    password passwordValue
+  } 
+}
