@@ -9,6 +9,7 @@ import com.intellij.ui.AppIcon;
 import com.intellij.util.ReflectionUtil;
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.reflect.Field;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -36,8 +37,16 @@ public class AnyBarConnector implements ApplicationComponent {
     @Override
     public void initComponent() {
         final AnyBarIcon anyBarIcon = new AnyBarIcon(AppIcon.getInstance());
-        ReflectionUtil.setField(AppIcon.class, null, AppIcon.class, "ourIcon", anyBarIcon);
-        ReflectionUtil.setField(AppIcon.class, null, AppIcon.class, "ourMacImpl", anyBarIcon);
+        for (Field field : ReflectionUtil.getClassDeclaredFields(AppIcon.class)) {
+            if (AppIcon.class.isAssignableFrom(field.getType())) {
+                try {
+                    field.setAccessible(true);
+                    field.set(null, anyBarIcon);
+                } catch (IllegalAccessException e) {
+                    Logger.getInstance(AnyBarConnector.class).error(e);
+                }
+            }
+        }
     }
 
     @Override
